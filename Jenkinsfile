@@ -5,16 +5,20 @@ agent any
 	    jdk 'jdk1.8.0_221'
 	}
 	stages{
-		stage('Build'){
+		stage('build'){
 				steps{
-				    bat 'mvn compiler:compile'
+				bat 'mvn compiler:compile'
 				}
+<<<<<<< HEAD
+				 post {
+=======
 				post {
+>>>>>>> 45b71fa17699fcb95821c4c21dffc178b49d69ea
                     success {
-                        bat "echo 'Projet compilé avec succès'"
+                     bat "echo 'Projet compilé avec succès'"
                     }
                     failure {
-                        bat "echo 'Erreur lors de la compilation du projet'"
+                     bat "echo 'Erreur lors de la compilation du projet'"
                     }
               }
 		}
@@ -28,13 +32,16 @@ agent any
                 }
             }
         }
-		stage('Couverture') {
+		stage('couverture') {
             steps {
+
                 bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+
             }
              post {
                   always {
                         cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
+
                         }
                   }
         }
