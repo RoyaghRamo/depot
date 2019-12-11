@@ -5,7 +5,7 @@ agent any
 	    jdk 'jdk1.8.0_221'
 	}
 	stages{
-		stage('build'){
+		stage('Build'){
 				steps{
 				    bat 'mvn compiler:compile'
 				}
@@ -28,14 +28,13 @@ agent any
                 }
             }
         }
-		stage('couverture') {
+		stage('Couverture') {
             steps {
                 bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
             }
              post {
                   always {
                         cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
-
                         }
                   }
         }
